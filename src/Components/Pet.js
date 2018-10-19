@@ -14,7 +14,10 @@ class Pet extends Component {
         }
 
         if (['dogs', 'cats'].indexOf(animal) !== -1) {
-            var date = new Date().toJSON().slice(0,10);
+            var utc = new Date().getTime();
+            // 00:00 in PST timezone - is a time for new animal (it's UTC-7)
+            var pst = new Date(utc - (3600000 * 7)).toJSON();
+            var date = pst.slice(0,10);
             this.url = '/gifs/' + animal + '/' + date + '.gif';
         }
     }
