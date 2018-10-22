@@ -10,6 +10,12 @@
 /build
 
 # misc
+/_mac
+/.idea
+/inspection
+/*.xml
+package-lock.json
+/public/gifs/
 .DS_Store
 .env.local
 .env.development.local
