@@ -9,6 +9,9 @@ nav li {
     display: inline-block;
     cursor: pointer;
 }
+nav li.active {
+    border-bottom: 3px solid #00303f;
+}
 nav li:hover {
     background-color: #00303f;
 }
