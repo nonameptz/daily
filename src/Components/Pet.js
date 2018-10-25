@@ -20,6 +20,8 @@ class Pet extends Component {
             var date = pst.slice(0,10);
             this.url = '/gifs/' + animal + '/' + date + '.gif';
         }
+        // for localhost only
+        // this.url = 'https://daily-pet.ru/' + this.url;
     }
 
     render() {
