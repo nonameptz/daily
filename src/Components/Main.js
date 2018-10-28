@@ -2,12 +2,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Pet from './Pet';
 import NotFound from './NotFound';
+import Privacy from './Privacy';
 
 const Main = () => (
     <main>
         <Switch>
             <Route path='/cat' render={()=><Pet value="cats"/>} />
             <Route path='/dog' render={()=><Pet value="dogs"/>} />
+            <Route path='/privacy' component={Privacy} />
             <Route component={NotFound}/>
         </Switch>
     </main>

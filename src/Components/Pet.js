@@ -23,7 +23,7 @@ class Pet extends Component {
         }
         // for localhost only
         // this.no_image_url = 'https://daily-pet.ru/' + this.no_image_url;
-        this.image_url = 'https://daily-pet.ru/' + this.image_url;
+        // this.image_url = 'https://daily-pet.ru/' + this.image_url;
     }
 
     render() {
