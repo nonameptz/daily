@@ -15,7 +15,9 @@ class NotFound extends Component {
                         <p>So even if Justin Bieber asked nicely to see your data,
                             we wouldn’t have anything to show him.</p>
                     </div>
-                    <img src="https://daily-pet.ru/gifs/privacy.gif" className="privacy-picture" alt="logo" />
+                    <img src="https://daily-pet.ru/gifs/privacy.gif"
+                         className="privacy-picture"
+                         alt="logo" />
                 </header>
             </div>
         );
