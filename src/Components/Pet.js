@@ -18,16 +18,14 @@ class Pet extends Component {
     render() {
         let mainContentClassName = 'main-content active-' + this.props.value;
         return (
-            <div>
-                <div className={mainContentClassName}>
-                    <h2 className="daily-header">Here is your Daily {this.contextData.title}</h2>
-                    <a href={this.contextData.tgUrl}>
-                        <LazyImage className="daily-picture"
-                                   unloadedSrc={this.noImageUrl}
-                                   src={this.imageUrl} />
-                    </a>
-                    <p className="m-top-30">Follow our telegram <a href={this.contextData.tgUrl}>channel</a>!</p>
-                </div>
+            <div className={mainContentClassName}>
+                <h2 className="daily-header">Here is your Daily {this.contextData.title}</h2>
+                <a href={this.contextData.tgUrl}>
+                    <LazyImage className="daily-picture"
+                               unloadedSrc={this.noImageUrl}
+                               src={this.imageUrl} />
+                </a>
+                <p className="m-top-30">Follow our telegram <a href={this.contextData.tgUrl}>channel</a>!</p>
             </div>
         );
     }

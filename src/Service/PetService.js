@@ -2,7 +2,7 @@ const PetService = {
     getGlobalUrl: () => {
         return '';
         //TODO do it only for localhost
-        //return 'https://daily-pet.ru/'
+        // return 'https://daily-pet.ru/'
     },
 
     getImageUrl: (animal) => {
@@ -30,6 +30,6 @@ const PetService = {
             title
         }
     }
-}
+};
 
 export default PetService;

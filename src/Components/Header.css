@@ -6,7 +6,7 @@ nav ul {
 nav li {
     padding: 10px 0;
     list-style: none;
-    width: 50%;
+    width: 25%;
     display: inline-block;
     cursor: pointer;
     border-bottom: 1px solid #00303f;
@@ -18,11 +18,24 @@ nav li.active {
     border-bottom: none;
 }
 nav li:hover {
-    background-color: #dfff00;
+    /*background-color: #dfff00;*/
 }
-.dog-header {
-    background-color: #78d3ff;
+li.header {
+    background-color: transparent;
 }
-.cat-header {
+.active {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+.dog-header.active {
+    background-color: #d970fb;
+}
+.cat-header.active {
     background-color: #ff93ea;
+}
+.send-header.active {
+    background-color: #ffbc00;
+}
+.privacy-header.active {
+    background-color: #0dfbda;
 }

@@ -16,19 +16,48 @@ class Header extends Component {
     render() {
         let dogClassName = 'dog-header';
         let catClassName = 'cat-header';
-        if (this.props.location.pathname === '/dog') {
-            dogClassName += ' active';
-        } else if (this.props.location.pathname === '/cat') {
-            catClassName += ' active';
+        let sendClassName = 'send-header';
+        let privacyClassName = 'privacy-header';
+        switch (this.props.location.pathname) {
+            case '/dog':
+                dogClassName += ' active';
+                break;
+            case '/cat':
+                catClassName += ' active';
+                break;
+            case '/send':
+                sendClassName += ' active';
+                break;
+            case '/privacy':
+                privacyClassName += ' active';
+                break;
+            default:
+                break;
         }
         return (
             <header>
                 <nav>
                     <ul>
                         <li className={dogClassName}
-                            onClick={e => this.handleClick('dog')}>🐶</li>
+                            onClick={e => this.handleClick('dog')}>
+                            <span role="img"
+                                  aria-label="dog">🐶</span>
+                        </li>
                         <li className={catClassName}
-                            onClick={e => this.handleClick('cat')}>🐱</li>
+                            onClick={e => this.handleClick('cat')}>
+                            <span role="img"
+                                  aria-label="cat">🐱</span>
+                        </li>
+                        <li className={sendClassName}
+                            onClick={e => this.handleClick('send')}>
+                            <span role="img"
+                                  aria-label="send">💜</span>
+                        </li>
+                        <li className={privacyClassName}
+                            onClick={e => this.handleClick('privacy')}>
+                            <span role="img"
+                                  aria-label="privacy">🗄️</span>
+                        </li>
                     </ul>
                 </nav>
             </header>

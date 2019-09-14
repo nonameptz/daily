@@ -1,6 +1,7 @@
 body {
   margin: 10px;
   background-color: #78d3ff;
+  font-family: 'Quicksand', sans-serif;
 }
 
 header {
@@ -45,12 +46,20 @@ a {
   border-left: 1px solid #00303f;
   border-right: 1px solid #00303f;
   border-bottom: 1px solid #00303f;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 .main-content.active-dogs {
-  background-color: #78d3ff;
+  background-color: #d970fb;
 }
 .main-content.active-cats {
   background-color: #ff93ea;
+}
+.main-content.active-send {
+  background-color: #ffbc00;
+}
+.main-content.active-privacy {
+  background-color: #0dfbda;
 }
 
 .app-link {

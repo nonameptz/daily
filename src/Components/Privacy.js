@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import './Privacy.css';
 
-class NotFound extends Component {
+class Privacy extends Component {
     render() {
         return (
-            <div>
+            <div className="main-content active-privacy">
                 <header className="app-header">
-                    <h2 className="privacy-header">Privacy Policy</h2>
+                    <h2 className="privacy-content-header">Privacy Policy</h2>
                     <div className="privacy-data">
                         <p>We don't store any of your data.</p>
                         <p>We physically can’t. We have nowhere to store it.
@@ -24,4 +24,4 @@ class NotFound extends Component {
     }
 }
 
-export default NotFound;
+export default Privacy;
