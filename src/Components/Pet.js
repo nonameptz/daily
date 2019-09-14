@@ -7,26 +7,27 @@ class Pet extends Component {
     constructor(props, context) {
         super(props, context);
         var animal = props.value;
-        this.no_image_url = PetService.getNoImageUrl(animal);
-        this.context_data = PetService.getContextData(animal);
+        this.noImageUrl = PetService.getNoImageUrl(animal);
+        this.contextData = PetService.getContextData(animal);
 
         if (['dogs', 'cats'].indexOf(animal) !== -1) {
-            this.image_url = PetService.getImageUrl(animal);
+            this.imageUrl = PetService.getImageUrl(animal);
         }
     }
 
     render() {
+        let mainContentClassName = 'main-content active-' + this.props.value;
         return (
             <div>
-                <header className="app-header">
-                    <h2 className="daily-header">Here is your Daily {this.context_data.title}</h2>
-                    <a href={this.context_data.tg_url}>
+                <div className={mainContentClassName}>
+                    <h2 className="daily-header">Here is your Daily {this.contextData.title}</h2>
+                    <a href={this.contextData.tgUrl}>
                         <LazyImage className="daily-picture"
-                                   unloadedSrc={this.no_image_url}
-                                   src={this.image_url} />
+                                   unloadedSrc={this.noImageUrl}
+                                   src={this.imageUrl} />
                     </a>
-                    <p>Follow our telegram <a href={this.context_data.tg_url}>channel</a>!</p>
-                </header>
+                    <p className="m-top-30">Follow our telegram <a href={this.contextData.tgUrl}>channel</a>!</p>
+                </div>
             </div>
         );
     }

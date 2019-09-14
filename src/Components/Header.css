@@ -18,5 +18,11 @@ nav li.active {
     border-bottom: none;
 }
 nav li:hover {
-    background-color: #00303f;
+    background-color: #dfff00;
+}
+.dog-header {
+    background-color: #78d3ff;
+}
+.cat-header {
+    background-color: #ff93ea;
 }

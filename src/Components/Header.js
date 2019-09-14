@@ -5,9 +5,7 @@ import './Header.css';
 class Header extends Component {
     constructor(props, context) {
         super(props, context);
-        this.isDog = props.location.pathname === '/dog';
-        this.isCat = props.location.pathname === '/cat';
-        // This binding is necessary to make `this` work in the callback
+
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -16,13 +14,20 @@ class Header extends Component {
     }
 
     render() {
+        let dogClassName = 'dog-header';
+        let catClassName = 'cat-header';
+        if (this.props.location.pathname === '/dog') {
+            dogClassName += ' active';
+        } else if (this.props.location.pathname === '/cat') {
+            catClassName += ' active';
+        }
         return (
             <header>
                 <nav>
                     <ul>
-                        <li className={this.isDog ? 'active' : ''}
+                        <li className={dogClassName}
                             onClick={e => this.handleClick('dog')}>🐶</li>
-                        <li className={this.isCat ? 'active' : ''}
+                        <li className={catClassName}
                             onClick={e => this.handleClick('cat')}>🐱</li>
                     </ul>
                 </nav>
@@ -30,6 +35,5 @@ class Header extends Component {
         )
     }
 }
-//onClick={e => this.handleClick('dog')}
 
 export default withRouter(Header);
