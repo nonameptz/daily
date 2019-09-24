@@ -1,8 +1,8 @@
 const PetService = {
     getGlobalUrl: () => {
-        return '';
+        // return '';
         //TODO do it only for localhost
-        // return 'https://daily-pet.ru/'
+        return 'https://daily-pet.ru/'
     },
 
     getImageUrl: (animal) => {

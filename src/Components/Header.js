@@ -14,22 +14,40 @@ class Header extends Component {
     }
 
     render() {
-        let dogClassName = 'dog-header';
-        let catClassName = 'cat-header';
-        let sendClassName = 'send-header';
-        let privacyClassName = 'privacy-header';
+        let headerValues = {
+            'dog' : {
+                'label': 'dog',
+                'className': 'dog-header',
+                'emoji': '🐶'
+            },
+            'cat' : {
+                'label': 'cat',
+                'className': 'cat-header',
+                'emoji': '🐱'
+            },
+            'send' : {
+                'label': 'send',
+                'className': 'send-header',
+                'emoji': '💜'
+            },
+            'privacy' : {
+                'label': 'privacy',
+                'className': 'privacy-header',
+                'emoji': '🗄️'
+            },
+        };
         switch (this.props.location.pathname) {
             case '/dog':
-                dogClassName += ' active';
+                headerValues['dog']['className'] += ' active';
                 break;
             case '/cat':
-                catClassName += ' active';
+                headerValues['cat']['className'] += ' active';
                 break;
             case '/send':
-                sendClassName += ' active';
+                headerValues['send']['className'] += ' active';
                 break;
             case '/privacy':
-                privacyClassName += ' active';
+                headerValues['privacy']['className'] += ' active';
                 break;
             default:
                 break;
@@ -38,26 +56,17 @@ class Header extends Component {
             <header>
                 <nav>
                     <ul>
-                        <li className={dogClassName}
-                            onClick={e => this.handleClick('dog')}>
-                            <span role="img"
-                                  aria-label="dog">🐶</span>
-                        </li>
-                        <li className={catClassName}
-                            onClick={e => this.handleClick('cat')}>
-                            <span role="img"
-                                  aria-label="cat">🐱</span>
-                        </li>
-                        <li className={sendClassName}
-                            onClick={e => this.handleClick('send')}>
-                            <span role="img"
-                                  aria-label="send">💜</span>
-                        </li>
-                        <li className={privacyClassName}
-                            onClick={e => this.handleClick('privacy')}>
-                            <span role="img"
-                                  aria-label="privacy">🗄️</span>
-                        </li>
+                        {Object.keys(headerValues).map((key, index) => {
+                            let value = headerValues[key];
+                            return (
+                                <li className={value.className}
+                                    key={index}
+                                    onClick={e => this.handleClick(value.label)}>
+                                    <span role="img"
+                                          aria-label="value.label">{value.emoji}</span>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </nav>
             </header>

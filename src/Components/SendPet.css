@@ -1,3 +1,58 @@
 h2.send-header {
     margin: 20px 0 10px;
 }
+
+.top-text {
+    margin-top: 0;
+}
+
+.send-input {
+    padding: 10px;
+    font-size: large;
+    border-radius: 12px;
+    border: 1px solid;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.send-input.success {
+    background-color: #ff93ea;
+}
+.send-input.error {
+    border: 2px solid red;
+    background-color: #ff7c7c;
+}
+
+.form-selector span {
+    margin: 0 20px;
+}
+label.pet-selector, label.submit-button {
+    border-radius: 12px;
+    padding: 7px 25px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+label.submit-button {
+    clear: both;
+}
+label.pet-selector.active, label.submit-button.active {
+    background-color: #ff93ea;
+}
+
+.submit-wrapper {
+    margin-bottom: 20px;
+}
+
+sup {
+    font-size: 15px;
+    background-color: #26d026;
+    padding: 2px 13px;
+    border-radius: 12px;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: #ff93ea !important;
+    color: #000;
+}
+.DayPicker-Month {
+    margin-top: 0;
+}

@@ -20,10 +20,10 @@ nav li.active {
 nav li:hover {
     /*background-color: #dfff00;*/
 }
-li.header {
+nav li {
     background-color: transparent;
 }
-.active {
+nav li.active {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
 }
