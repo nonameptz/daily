@@ -40,7 +40,8 @@ class SendPet extends Component {
     });
   }
 
-  submit() {
+  submit(event) {
+    event.preventDefault();
     if (!this.state.gif || !this.state.pet || !this.state.selectedDay) {
       console.log("ERROR");
       return;
@@ -109,7 +110,8 @@ class SendPet extends Component {
     });
   }
 
-  handlePetSelectorClick(pet) {
+  handlePetSelectorClick(event, pet) {
+    event.preventDefault();
     var elems = document.querySelectorAll(".pet-selector.active");
 
     [].forEach.call(elems, function(el) {
@@ -133,25 +135,23 @@ class SendPet extends Component {
           <form>
             <p className="top-text">I want to send a funny</p>
             <div className="form-group form-selector">
-              <div
+              <button
                 className="pet-selector active"
                 id="dog-selector"
-                role="button"
                 tabIndex="0"
-                onClick={() => this.handlePetSelectorClick("dog")}
+                onClick={(e) => this.handlePetSelectorClick(e, "dog")}
               >
                 Dog
-              </div>
+              </button>
               <span>or</span>
-              <div
+              <button
                 className="pet-selector"
                 id="cat-selector"
-                role="button"
                 tabIndex="0"
-                onClick={() => this.handlePetSelectorClick("cat")}
+                onClick={(e) => this.handlePetSelectorClick(e, "cat")}
               >
                 Cat
-              </div>
+              </button>
             </div>
             <p>and here is my gif url:</p>
             <input
@@ -173,8 +173,7 @@ class SendPet extends Component {
               firstDayOfWeek={1}
             />
             <div className="submit-wrapper">
-              <div
-                role="button"
+              <button
                 className={
                   "submit-button " +
                   (this.state.selectedDay && this.state.gifError === false
@@ -182,10 +181,10 @@ class SendPet extends Component {
                     : "")
                 }
                 tabIndex="0"
-                onClick={() => this.submit()}
+                onClick={(e) => this.submit(e)}
               >
                 Yes yes please!
-              </div>
+              </button>
             </div>
           </form>
         </div>

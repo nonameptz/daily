@@ -24,20 +24,24 @@ h2.send-header {
 .form-selector {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .form-selector span {
-    margin: 6px 20px 0;
+    margin: 6px 10px 0;
 }
-div.pet-selector {
-    width: 30%;
+button.pet-selector {
+    margin: 0 15px;
 }
-div.pet-selector, div.submit-button {
+button.pet-selector, button.submit-button {
     border-radius: 12px;
     padding: 7px 25px;
     border: 1px solid #000;
     cursor: pointer;
+    background: transparent;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
 }
-div.pet-selector.active, div.submit-button.active {
+button.pet-selector.active, button.submit-button.active {
     background-color: #ff93ea;
 }
 
