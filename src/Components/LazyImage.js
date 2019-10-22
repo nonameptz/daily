@@ -1,56 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./LazyImage.css";
 
-export default class LazyImage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loaded: false,
-      error: false
-    };
-  }
+const LazyImage = (props) => {
+  const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     const img = new Image();
     img.onload = () => {
-      this.setState({
-        loaded: true
-      });
+      setLoaded(true);
     };
     img.onerror = () => {
-      this.setState({
-        error: true
-      });
+      setError(true);
     };
-    img.src = this.props.src;
-  }
+    img.src = props.src;
+  }, [props.src]);
 
-  render() {
-    if (this.state.error) {
-      return (
-        <img
-          className={this.props.className}
-          style={this.props.style}
-          src={this.props.unloadedSrc}
-          alt={this.props.alt}
-        />
-      );
-    } else if (!this.state.loaded) {
-      return (
-        <div className="bouncing-loader">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      );
-    }
-    return (
-      <img
-        className={this.props.className}
-        style={this.props.style}
-        src={this.props.src}
-        alt={this.props.alt}
-      />
-    );
-  }
-}
+  return (
+      <div>
+        {!loaded &&
+          <div className="bouncing-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        }
+        {loaded &&
+          <img
+            className={props.className}
+            style={props.style}
+            src={ error ? props.noImageSrc : props.src}
+            alt={props.alt}
+          />
+        }
+      </div>
+  )
+};
+
+export default LazyImage;

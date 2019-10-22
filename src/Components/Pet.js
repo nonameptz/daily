@@ -25,8 +25,8 @@ class Pet extends Component {
         <a href={this.contextData.tgUrl}>
           <LazyImage
             className="daily-picture"
-            unloadedSrc={this.noImageUrl}
-            src={this.imageUrl}
+            noImageSrc={this.noImageUrl}
+            src="asd.gif"
           />
         </a>
         <p className="m-top-30">
