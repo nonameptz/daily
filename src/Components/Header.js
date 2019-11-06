@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
 import "./Header.css";
 
 class Header extends Component {
@@ -10,37 +9,38 @@ class Header extends Component {
   }
 
   handleClick(animal) {
-    window.location = "/" + animal;
+    window.location = animal;
   }
 
   render() {
     let headerValues = {
       dog: {
-        label: "dog",
+        label: "/daily/dog",
         className: "dog-header",
         emoji: "🐶"
       },
       cat: {
-        label: "cat",
+        label: "/daily/cat",
         className: "cat-header",
         emoji: "🐱"
       },
       send: {
-        label: "send",
+        label: "/send",
         className: "send-header",
         emoji: "💜"
       },
       privacy: {
-        label: "privacy",
+        label: "/privacy",
         className: "privacy-header",
         emoji: "🗄️"
       }
     };
-    switch (this.props.location.pathname) {
-      case "/dog":
+    switch (window.location.pathname) {
+      case "/":
+      case "/daily/dog":
         headerValues["dog"]["className"] += " active";
         break;
-      case "/cat":
+      case "/daily/cat":
         headerValues["cat"]["className"] += " active";
         break;
       case "/send":
@@ -77,4 +77,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+export default Header;

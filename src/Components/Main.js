@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Router, Redirect } from "@reach/router"
 import Pet from "./Pet";
 import NotFound from "./NotFound";
 import SendPet from "./SendPet";
@@ -7,13 +7,19 @@ import Privacy from "./Privacy";
 
 const Main = () => (
   <main>
-    <Switch>
-      <Route path="/cat" render={() => <Pet value="cats" />} />
-      <Route path="/dog" render={() => <Pet value="dogs" />} />
-      <Route path="/send" component={SendPet} />
-      <Route path="/privacy" component={Privacy} />
-      <Route component={NotFound} />
-    </Switch>
+    <Router>
+      <Pet path="/daily/:pet" />
+      <SendPet path="/send" />
+      <Privacy path="/privacy" />
+
+      <Redirect
+        noThrow
+        from="/"
+        to="/daily/dog"
+      />
+
+      <NotFound default />
+    </Router>
   </main>
 );
 

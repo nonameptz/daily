@@ -49,10 +49,10 @@ a {
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
-.main-content.active-dogs {
+.main-content.active-dog {
   background-color: #d970fb;
 }
-.main-content.active-cats {
+.main-content.active-cat {
   background-color: #ff93ea;
 }
 .main-content.active-send {

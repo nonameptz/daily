@@ -6,17 +6,17 @@ import PetService from "../Service/PetService";
 class Pet extends Component {
   constructor(props, context) {
     super(props, context);
-    var animal = props.value;
+    const animal = props.pet;
     this.noImageUrl = PetService.getNoImageUrl(animal);
     this.contextData = PetService.getContextData(animal);
 
-    if (["dogs", "cats"].indexOf(animal) !== -1) {
+    if (["dog", "cat"].indexOf(animal) !== -1) {
       this.imageUrl = PetService.getImageUrl(animal);
     }
   }
 
   render() {
-    let mainContentClassName = "main-content active-" + this.props.value;
+    let mainContentClassName = "main-content active-" + this.props.pet;
     return (
       <div className={mainContentClassName}>
         <h2 className="daily-header">
@@ -26,7 +26,7 @@ class Pet extends Component {
           <LazyImage
             className="daily-picture"
             noImageSrc={this.noImageUrl}
-            src="asd.gif"
+            src={this.imageUrl}
           />
         </a>
         <p className="m-top-30">

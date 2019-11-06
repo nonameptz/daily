@@ -2,7 +2,7 @@ const PetService = {
   getGlobalUrl: () => {
     // return '';
     //TODO do it only for localhost
-    return "https://daily-pet.ru/";
+    return "https://daily-pet.ru";
   },
 
   getImageUrl: animal => {
@@ -11,17 +11,17 @@ const PetService = {
     let pst = new Date(utc - 3600000 * 7).toJSON();
     let date = pst.slice(0, 10);
 
-    return PetService.getGlobalUrl() + "/gifs/" + animal + "/" + date + ".gif";
+    return PetService.getGlobalUrl() + "/gifs/" + animal + "s/" + date + ".gif";
   },
 
   getNoImageUrl: animal => {
-    return PetService.getGlobalUrl() + "/gifs/" + animal + "/_not_found.gif";
+    return PetService.getGlobalUrl() + "/gifs/" + animal + "s/_not_found.gif";
   },
 
   getContextData: animal => {
     let tgUrl = "tg://resolve?domain=daily_dog";
     let title = "Dog 🐶";
-    if (animal === "cats") {
+    if (animal === "cat") {
       tgUrl = "tg://resolve?domain=daily_cat_gif";
       title = "Cat 🐱";
     }
