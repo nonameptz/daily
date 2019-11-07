@@ -28,9 +28,9 @@ class SendPet extends Component {
   }
 
   handleInputChange(event) {
-    const gif = event && event.target && event.target.value.toLowerCase();
+    const gif = event && event.target && event.target.value;
 
-    if (!gif || !gif.endsWith(".gif")) {
+    if (!gif || !gif.toLowerCase().endsWith(".gif")) {
       this.setState({ gifError: true });
     } else {
       this.setState({ gifError: false });
@@ -93,8 +93,9 @@ class SendPet extends Component {
     //new Date(2017, 3, 12)
     response.forEach(date => {
       let fullDate = date.split("-");
+      console.log(date);
       disabledDays.push(
-        new Date(fullDate[0], parseInt(fullDate[1]) - 1, fullDate[2])
+        new Date(fullDate[0], +(fullDate[1]) - 1, fullDate[2])
       );
     });
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Header.css";
+import { HEADER_VALUES } from "./Header.constant";
 
 class Header extends Component {
   constructor(props, context) {
@@ -13,41 +14,20 @@ class Header extends Component {
   }
 
   render() {
-    let headerValues = {
-      dog: {
-        label: "/daily/dog",
-        className: "dog-header",
-        emoji: "🐶"
-      },
-      cat: {
-        label: "/daily/cat",
-        className: "cat-header",
-        emoji: "🐱"
-      },
-      send: {
-        label: "/send",
-        className: "send-header",
-        emoji: "💜"
-      },
-      privacy: {
-        label: "/privacy",
-        className: "privacy-header",
-        emoji: "🗄️"
-      }
-    };
+    let headerValues = {};
     switch (window.location.pathname) {
       case "/":
       case "/daily/dog":
-        headerValues["dog"]["className"] += " active";
+        headerValues["dog"] = " active";
         break;
       case "/daily/cat":
-        headerValues["cat"]["className"] += " active";
+        headerValues["cat"] = " active";
         break;
       case "/send":
-        headerValues["send"]["className"] += " active";
+        headerValues["send"] = " active";
         break;
       case "/privacy":
-        headerValues["privacy"]["className"] += " active";
+        headerValues["privacy"] = " active";
         break;
       default:
         break;
@@ -56,11 +36,11 @@ class Header extends Component {
       <header>
         <nav>
           <ul>
-            {Object.keys(headerValues).map((key, index) => {
-              let value = headerValues[key];
+            {Object.keys(HEADER_VALUES).map((key, index) => {
+              let value = HEADER_VALUES[key];
               return (
                 <li
-                  className={value.className}
+                  className={value.className + headerValues[key]}
                   key={index}
                   onClick={() => this.handleClick(value.label)}
                 >
