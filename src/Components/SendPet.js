@@ -13,7 +13,8 @@ class SendPet extends Component {
       selectedDay: null,
       disabledDays: [],
       gifError: null,
-      gif: ""
+      gif: "",
+      resultMsg: ""
     };
 
     this.handlePetSelectorClick = this.handlePetSelectorClick.bind(this);
@@ -43,9 +44,10 @@ class SendPet extends Component {
   submit(event) {
     event.preventDefault();
     if (!this.state.gif || !this.state.pet || !this.state.selectedDay) {
-      console.log("ERROR");
       return;
     }
+    const reply = this.state.pet === 'dog' ? 'Afff!' : 'Meow!';
+    let resultMsg = '';
     axios
       .post(`https://daily-pet.ru/scripts/add_spec_gif.php`, {
         pet: this.state.pet,
@@ -53,7 +55,15 @@ class SendPet extends Component {
         day: this.state.selectedDay.toLocaleDateString()
       })
       .then(res => {
-        console.log(res);
+        if (res.data === 'success') {
+          resultMsg = 'Success! Page will be reloaded in a while. ' + reply;
+        } else {
+          resultMsg = 'Error! :( Page will be reloaded in a while. ' + reply;
+        }
+        this.setState({ resultMsg });
+        setTimeout(() => {
+          document.location.reload(true);
+        }, 3000)
       });
   }
 
@@ -174,6 +184,7 @@ class SendPet extends Component {
               firstDayOfWeek={1}
             />
             <div className="submit-wrapper">
+              {!this.state.resultMsg &&
               <button
                 className={
                   "submit-button " +
@@ -186,6 +197,12 @@ class SendPet extends Component {
               >
                 Yes yes please!
               </button>
+              }
+              {this.state.resultMsg &&
+              <div className="resultMsg">
+                {this.state.resultMsg}
+              </div>
+              }
             </div>
           </form>
         </div>

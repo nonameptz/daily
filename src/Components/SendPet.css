@@ -63,3 +63,10 @@ sup {
 .DayPicker-Month {
     margin-top: 0;
 }
+
+.resultMsg {
+    padding: 10px;
+    border: 1px dashed #000;
+    background-color: #ff93ea;
+    width: 250px;
+}
