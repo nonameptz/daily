@@ -6,12 +6,33 @@ import PetService from "../Service/PetService";
 class Pet extends Component {
   constructor(props, context) {
     super(props, context);
-    const animal = props.pet;
-    this.noImageUrl = PetService.getNoImageUrl(animal);
-    this.contextData = PetService.getContextData(animal);
+    this.props = props;
+    this.state = {
+      noImageUrl: '',
+      contextData: {},
+      imageUrl: '',
+    };
+  }
 
+  componentWillMount() {
+      this.initializePet(this.props.pet);
+  }
+
+  initializePet = animal => {
+    let imageUrl = '';
     if (["dog", "cat"].indexOf(animal) !== -1) {
-      this.imageUrl = PetService.getImageUrl(animal);
+      imageUrl = PetService.getImageUrl(animal);
+    }
+    this.setState({
+      noImageUrl: PetService.getNoImageUrl(animal),
+      contextData: PetService.getContextData(animal),
+      imageUrl: imageUrl,
+    })
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.pet !== prevProps.pet) {
+      this.initializePet(this.props.pet);
     }
   }
 
@@ -20,17 +41,17 @@ class Pet extends Component {
     return (
       <div className={mainContentClassName}>
         <h2 className="daily-header">
-          Here is your Daily {this.contextData.title}
+          Here is your Daily {this.state.contextData.title}
         </h2>
-        <a href={this.contextData.tgUrl}>
+        <a href={this.state.contextData.tgUrl}>
           <LazyImage
             className="daily-picture"
-            noImageSrc={this.noImageUrl}
-            src={this.imageUrl}
+            noImageSrc={this.state.noImageUrl}
+            src={this.state.imageUrl}
           />
         </a>
         <p className="m-top-30">
-          Follow our telegram <a href={this.contextData.tgUrl}>channel</a>!
+          Follow our telegram <a href={this.state.contextData.tgUrl}>channel</a>!
         </p>
       </div>
     );

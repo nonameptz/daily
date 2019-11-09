@@ -6,6 +6,7 @@ const LazyImage = (props) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    setLoaded(false);
     const img = new Image();
     img.onload = () => {
       setLoaded(true);
