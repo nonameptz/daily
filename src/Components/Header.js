@@ -1,48 +1,30 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
+import { navigate } from '@reach/router';
 import "./Header.css";
 import { HEADER_VALUES } from "./Header.constant";
+import ThemeContext from './ThemeContext';
 
-class Header extends Component {
-  constructor(props, context) {
-    super(props, context);
+const Header = () => {
+  const [theme, setTheme] = useContext(ThemeContext);
 
-    this.handleClick = this.handleClick.bind(this);
-  }
+  const handleClick =(animal, path) => {
+    setTheme(animal);
+    navigate(path);
+  };
 
-  handleClick(animal) {
-    window.location = animal;
-  }
-
-  render() {
-    let headerValues = {};
-    switch (window.location.pathname) {
-      case "/":
-      case "/daily/dog":
-        headerValues["dog"] = " active";
-        break;
-      case "/daily/cat":
-        headerValues["cat"] = " active";
-        break;
-      case "/send":
-        headerValues["send"] = " active";
-        break;
-      case "/privacy":
-        headerValues["privacy"] = " active";
-        break;
-      default:
-        break;
-    }
-    return (
-      <header>
+  return (
+    <header>
+      <ThemeContext.Consumer>
+        {([theme]) => (
         <nav>
           <ul>
             {Object.keys(HEADER_VALUES).map((key, index) => {
               let value = HEADER_VALUES[key];
               return (
                 <li
-                  className={value.className + headerValues[key]}
+                  className={value.className + (theme === key ? ' active' : '')}
                   key={index}
-                  onClick={() => this.handleClick(value.label)}
+                  onClick={() => handleClick(key, value.label)}
                 >
                   <span role="img" aria-label="value.label">
                     {value.emoji}
@@ -52,9 +34,10 @@ class Header extends Component {
             })}
           </ul>
         </nav>
-      </header>
-    );
-  }
-}
+        )}
+      </ThemeContext.Consumer>
+    </header>
+  );
+};
 
 export default Header;

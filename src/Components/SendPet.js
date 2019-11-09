@@ -16,19 +16,13 @@ class SendPet extends Component {
       gif: "",
       resultMsg: ""
     };
-
-    this.handlePetSelectorClick = this.handlePetSelectorClick.bind(this);
-    this.handleDayClick = this.handleDayClick.bind(this);
-    this.getDisabledDays = this.getDisabledDays.bind(this);
-    this.submit = this.submit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
     this.getDisabledDays(this.state.pet);
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     const gif = event && event.target && event.target.value;
 
     if (!gif || !gif.toLowerCase().endsWith(".gif")) {
@@ -39,9 +33,9 @@ class SendPet extends Component {
     this.setState({
       gif
     });
-  }
+  };
 
-  submit(event) {
+  submit = event => {
     event.preventDefault();
     if (!this.state.gif || !this.state.pet || !this.state.selectedDay) {
       return;
@@ -65,18 +59,18 @@ class SendPet extends Component {
           document.location.reload(true);
         }, 3000)
       });
-  }
+  };
 
   //TODO refactor and move to service
-  getSpecialGifs(pet) {
+  getSpecialGifs = pet => {
     return axios
       .get(`https://daily-pet.ru/scripts/get_spec_dates.php?pet=${pet}`)
       .then(res => {
         return res && res.data;
       });
-  }
+  };
 
-  async getDisabledDays(pet) {
+  getDisabledDays = async pet => {
     if (!pet) {
       return;
     }
@@ -103,25 +97,24 @@ class SendPet extends Component {
     //new Date(2017, 3, 12)
     response.forEach(date => {
       let fullDate = date.split("-");
-      console.log(date);
       disabledDays.push(
         new Date(fullDate[0], +(fullDate[1]) - 1, fullDate[2])
       );
     });
 
     this.setState({ disabledDays });
-  }
+  };
 
-  handleDayClick(day, modifiers = {}) {
+  handleDayClick = (day, modifiers = {}) => {
     if (modifiers.disabled) {
       return;
     }
     this.setState({
       selectedDay: modifiers.selected ? undefined : day
     });
-  }
+  };
 
-  handlePetSelectorClick(event, pet) {
+  handlePetSelectorClick = (event, pet) => {
     event.preventDefault();
     var elems = document.querySelectorAll(".pet-selector.active");
 
@@ -134,7 +127,7 @@ class SendPet extends Component {
       selectedDay: null
     });
     this.getDisabledDays(pet);
-  }
+  };
 
   render() {
     return (

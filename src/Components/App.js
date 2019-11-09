@@ -1,17 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "./App.css";
 import Header from "./Header";
 import Main from "./Main";
+import ThemeContext from "./ThemeContext";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="main-app">
+const App = () => {
+  const theme = useState(window.location.pathname.split('/').pop() || 'dog');
+  return (
+    <div className="main-app">
+      <ThemeContext.Provider value={theme}>
         <Header />
         <Main />
-      </div>
-    );
-  }
-}
+      </ThemeContext.Provider>
+    </div>
+  );
+};
 
 export default App;
