@@ -1,3 +1,21 @@
-/**
- * Created by noname on 10/11/2019.
- */
+import React, { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import './Modal.css';
+
+const modalRoot = document.getElementById("modal");
+
+const Modal = ({ children }) => {
+  const elRef = useRef(null);
+  if (!elRef.current) {
+    elRef.current = document.createElement("div");
+  }
+
+  useEffect(() => {
+    modalRoot.appendChild(elRef.current);
+    return () => modalRoot.removeChild(elRef.current);
+  }, []);
+
+  return createPortal(<div>{children}</div>, elRef.current);
+};
+
+export default Modal;

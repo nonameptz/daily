@@ -3,6 +3,7 @@ import axios from "axios";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import "./SendPet.css";
+import Modal from './Modal';
 
 class SendPet extends Component {
   constructor(props, context) {
@@ -192,9 +193,11 @@ class SendPet extends Component {
               </button>
               }
               {this.state.resultMsg &&
-              <div className="resultMsg">
-                {this.state.resultMsg}
-              </div>
+              <Modal>
+                <div className="resultMsg">
+                  {this.state.resultMsg}
+                </div>
+              </Modal>
               }
             </div>
           </form>

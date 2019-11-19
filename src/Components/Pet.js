@@ -26,7 +26,7 @@ class Pet extends Component {
     this.setState({
       noImageUrl: PetService.getNoImageUrl(animal),
       contextData: PetService.getContextData(animal),
-      imageUrl: imageUrl,
+      imageUrl,
     })
   };
 

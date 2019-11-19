@@ -5,7 +5,7 @@ import PetService from "../Service/PetService";
 class NotFound extends Component {
   constructor(props) {
     super(props);
-    var animals = ["cats", "dogs"];
+    var animals = ["cat", "dog"];
     var animal = animals[Math.floor(Math.random() * animals.length)];
     this.no_image_url = PetService.getNoImageUrl(animal);
     this.context_data = PetService.getContextData(animal);

@@ -66,7 +66,5 @@ sup {
 
 .resultMsg {
     padding: 10px;
-    border: 1px dashed #000;
-    background-color: #ff93ea;
-    width: 250px;
+    width: auto;
 }
