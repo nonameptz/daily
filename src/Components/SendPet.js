@@ -71,15 +71,11 @@ class SendPet extends Component {
       });
   };
 
-  getDisabledDays = async pet => {
-    if (!pet) {
-      return;
-    }
-    let disabledDays = [];
+  getAllowedDays = () => {
     let today = new Date();
     const tomorrow = new Date(today.setDate(today.getDate() + 2));
     const plus30days = new Date(today.setDate(today.getDate() + 30));
-    const allowDays = {
+    const allowedDays = {
       before: new Date(
         tomorrow.getFullYear(),
         tomorrow.getMonth(),
@@ -91,7 +87,22 @@ class SendPet extends Component {
         plus30days.getDate()
       )
     };
-    disabledDays.push(allowDays);
+
+    return new Promise((resolve, reject) => {
+      allowedDays ? resolve(allowedDays) : reject('Error');
+    })
+  };
+
+  getDisabledDays = async pet => {
+    if (!pet) {
+      return;
+    }
+    let disabledDays = [];
+    this.getAllowedDays()
+      .then((allowDays => {
+        disabledDays.push(allowDays);
+      }))
+      .catch(error => console.log('There was an error: ' + error));
 
     let response = await this.getSpecialGifs(pet);
 
