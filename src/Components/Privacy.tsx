@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { RouteComponentProps } from "@reach/router";
 import "./App.css";
 import "./Privacy.css";
 
-class Privacy extends Component {
-  render() {
+class Privacy extends Component<RouteComponentProps> {
+  public render() {
     return (
       <div className="main-content active-privacy">
         <header className="app-header">

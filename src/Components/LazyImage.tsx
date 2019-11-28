@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FunctionComponent } from "react";
 import "./LazyImage.css";
 
-const LazyImage = (props) => {
+interface IProps {
+  src: string,
+  style: object,
+  className: string
+  noImageSrc: string,
+  alt: string
+}
+
+const LazyImage: FunctionComponent<IProps> = props => {
+  const { src, style, className, noImageSrc, alt } = props;
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -14,24 +23,24 @@ const LazyImage = (props) => {
     img.onerror = () => {
       setError(true);
     };
-    img.src = props.src;
-  }, [props.src]);
+    img.src = src;
+  }, [src]);
 
   return (
       <div>
         {!loaded &&
           <div className="bouncing-loader">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div />
+            <div />
+            <div />
           </div>
         }
         {loaded &&
           <img
-            className={props.className}
-            style={props.style}
-            src={ error ? props.noImageSrc : props.src}
-            alt={props.alt}
+            className={className}
+            style={style}
+            src={ error ? noImageSrc : src}
+            alt={alt}
           />
         }
       </div>

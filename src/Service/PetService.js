@@ -1,3 +1,4 @@
+const animals = ['dog', 'cat'];
 const PetService = {
   getGlobalUrl: () => {
     // return '';
@@ -15,6 +16,10 @@ const PetService = {
   },
 
   getNoImageUrl: animal => {
+    //todo you can do it better!
+    if (animal.indexOf(animals) === -1) {
+      animal = 'dog';
+    }
     return PetService.getGlobalUrl() + "/gifs/" + animal + "s/_not_found.gif";
   },
 
