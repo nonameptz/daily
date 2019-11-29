@@ -1,4 +1,4 @@
-export const HEADER_VALUES = {
+export const HEADER_VALUES: {[index: string]:any} = {
     dog: {
         label: "/daily/dog",
         className: "dog-header",

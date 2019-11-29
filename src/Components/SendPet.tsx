@@ -1,30 +1,28 @@
 import React, { Component } from "react";
+import { RouteComponentProps } from "@reach/router";
 import axios from "axios";
-import DayPicker from "react-day-picker";
+import DayPicker, { DayModifiers } from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import "./SendPet.css";
 import Modal from './Modal';
 
-class SendPet extends Component {
-  constructor(props, context) {
-    super(props, context);
+class SendPet extends Component<RouteComponentProps> {
+  public state = {
+    pet: "dog",
+    selectedDay: {} as Date,
+    disabledDays: [],
+    gifError: null,
+    gif: "",
+    resultMsg: ""
+  };
 
-    this.state = {
-      pet: "dog",
-      selectedDay: null,
-      disabledDays: [],
-      gifError: null,
-      gif: "",
-      resultMsg: ""
-    };
+  public componentDidMount() {
+    this.updateDisabledDays(this.state.pet);
   }
 
-  componentDidMount() {
-    this.getDisabledDays(this.state.pet);
-  }
-
-  handleInputChange = event => {
-    const gif = event && event.target && event.target.value;
+  public handleInputChange = (event: React.SyntheticEvent) => {
+    const target = event && event.target as HTMLInputElement;
+    const gif =  target.value;
 
     if (!gif || !gif.toLowerCase().endsWith(".gif")) {
       this.setState({ gifError: true });
@@ -36,7 +34,7 @@ class SendPet extends Component {
     });
   };
 
-  submit = event => {
+  public submit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (!this.state.gif || !this.state.pet || !this.state.selectedDay) {
       return;
@@ -62,8 +60,8 @@ class SendPet extends Component {
       });
   };
 
-  //TODO refactor and move to service
-  getSpecialGifs = pet => {
+  // TODO refactor and move to service
+  public getSpecialGifs = (pet: string) => {
     return axios
       .get(`https://daily-pet.ru/scripts/get_spec_dates.php?pet=${pet}`)
       .then(res => {
@@ -71,8 +69,8 @@ class SendPet extends Component {
       });
   };
 
-  getAllowedDays = () => {
-    let today = new Date();
+  private getAllowedDays = () => {
+    const today = new Date();
     const tomorrow = new Date(today.setDate(today.getDate() + 2));
     const plus30days = new Date(today.setDate(today.getDate() + 30));
     const allowedDays = {
@@ -93,31 +91,33 @@ class SendPet extends Component {
     })
   };
 
-  getDisabledDays = async pet => {
+  private updateDisabledDays = async (pet: string) => {
     if (!pet) {
       return;
     }
-    let disabledDays = [];
+    const disabledDays = [] as any;
     this.getAllowedDays()
       .then((allowDays => {
         disabledDays.push(allowDays);
       }))
       .catch(error => console.log('There was an error: ' + error));
 
-    let response = await this.getSpecialGifs(pet);
+    const response = await this.getSpecialGifs(pet);
 
-    //new Date(2017, 3, 12)
-    response.forEach(date => {
-      let fullDate = date.split("-");
+    response.forEach((date: string) => {
+      const fullDate: string[] = date.split("-");
       disabledDays.push(
-        new Date(fullDate[0], +(fullDate[1]) - 1, fullDate[2])
+        new Date(+fullDate[0], +(fullDate[1]) - 1, +fullDate[2])
       );
     });
 
     this.setState({ disabledDays });
   };
 
-  handleDayClick = (day, modifiers = {}) => {
+  public handleDayClick = (
+      day: Date,
+      modifiers: DayModifiers
+    ) => {
     if (modifiers.disabled) {
       return;
     }
@@ -126,22 +126,25 @@ class SendPet extends Component {
     });
   };
 
-  handlePetSelectorClick = (event, pet) => {
+  public handlePetSelectorClick = (event: React.SyntheticEvent, pet: string) => {
     event.preventDefault();
-    var elems = document.querySelectorAll(".pet-selector.active");
+    const elems = document.querySelectorAll(".pet-selector.active");
 
-    [].forEach.call(elems, function(el) {
+    [].forEach.call(elems, (el: HTMLInputElement) => {
       el.classList.remove("active");
     });
-    document.getElementById(pet + "-selector").classList.add("active");
+    const petSelector = document.getElementById(pet + "-selector");
+    if (petSelector) {
+      petSelector.classList.add("active");
+    }
     this.setState({
       pet,
       selectedDay: null
     });
-    this.getDisabledDays(pet);
+    this.updateDisabledDays(pet);
   };
 
-  render() {
+  public render() {
     return (
       <div className="main-content active-send">
         <h2 className="send-header">
@@ -154,7 +157,6 @@ class SendPet extends Component {
               <button
                 className="pet-selector active"
                 id="dog-selector"
-                tabIndex="0"
                 onClick={(e) => this.handlePetSelectorClick(e, "dog")}
               >
                 Dog
@@ -163,7 +165,6 @@ class SendPet extends Component {
               <button
                 className="pet-selector"
                 id="cat-selector"
-                tabIndex="0"
                 onClick={(e) => this.handlePetSelectorClick(e, "cat")}
               >
                 Cat
@@ -178,14 +179,13 @@ class SendPet extends Component {
                 (this.state.gif && !this.state.gifError ? " success" : "")
               }
               value={this.state.gif}
-              tabIndex="0"
               onChange={this.handleInputChange}
             />
             <p>and I want to see it on:</p>
             <DayPicker
               disabledDays={this.state.disabledDays}
               selectedDays={this.state.selectedDay}
-              onDayClick={this.handleDayClick}
+              onDayClick={(day, modifires) => this.handleDayClick(day, modifires)}
               firstDayOfWeek={1}
             />
             <div className="submit-wrapper">
@@ -197,7 +197,6 @@ class SendPet extends Component {
                     ? "active"
                     : "")
                 }
-                tabIndex="0"
                 onClick={(e) => this.submit(e)}
               >
                 Yes yes please!

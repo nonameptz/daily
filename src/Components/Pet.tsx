@@ -1,25 +1,28 @@
 import React, { Component } from "react";
+import { RouteComponentProps } from "@reach/router";
 import "./App.css";
 import LazyImage from "./LazyImage";
 import PetService from "../Service/PetService";
 import NotFound from "./NotFound";
 
-class Pet extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.props = props;
-    this.state = {
-      noImageUrl: '',
-      contextData: {},
-      imageUrl: '',
-    };
+class Pet extends Component<RouteComponentProps<{ pet: string }>> {
+  public state = {
+    noImageUrl: '',
+    contextData: {
+      title: '' as string,
+      tgUrl: '' as string,
+    },
+    imageUrl: '',
+  };
+
+  public componentWillMount() {
+    if (!this.props.pet) {
+      return;
+    }
+    this.initializePet(this.props.pet);
   }
 
-  componentWillMount() {
-      this.initializePet(this.props.pet);
-  }
-
-  initializePet = animal => {
+  public initializePet = (animal: string) => {
     let imageUrl = '';
     if (["dog", "cat"].indexOf(animal) !== -1) {
       imageUrl = PetService.getImageUrl(animal);
@@ -31,14 +34,14 @@ class Pet extends Component {
     })
   };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.pet !== prevProps.pet) {
+  public componentDidUpdate(prevProps: RouteComponentProps<{ pet: string }>) {
+    if (this.props.pet && this.props.pet !== prevProps.pet) {
       this.initializePet(this.props.pet);
     }
   }
 
-  render() {
-    let mainContentClassName = "main-content active-" + this.props.pet;
+  public render() {
+    const mainContentClassName = "main-content active-" + this.props.pet;
     return (
       <div className={mainContentClassName}>
         {this.state.imageUrl &&
@@ -51,6 +54,7 @@ class Pet extends Component {
                   className="daily-picture"
                   noImageSrc={this.state.noImageUrl}
                   src={this.state.imageUrl}
+                  alt="daily image"
                 />
             </a>
             <p className="m-top-30">

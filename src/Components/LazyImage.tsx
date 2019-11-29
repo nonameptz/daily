@@ -3,14 +3,13 @@ import "./LazyImage.css";
 
 interface IProps {
   src: string,
-  style: object,
   className: string
   noImageSrc: string,
   alt: string
 }
 
 const LazyImage: FunctionComponent<IProps> = props => {
-  const { src, style, className, noImageSrc, alt } = props;
+  const { src, className, noImageSrc, alt } = props;
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -38,7 +37,6 @@ const LazyImage: FunctionComponent<IProps> = props => {
         {loaded &&
           <img
             className={className}
-            style={style}
             src={ error ? noImageSrc : src}
             alt={alt}
           />

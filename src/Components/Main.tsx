@@ -13,12 +13,12 @@ const Main = () => (
       <Privacy path="/privacy" />
 
       <Redirect
-        noThrow
+        noThrow={true}
         from="/"
         to="/daily/dog"
       />
 
-      <NotFound default />
+      <NotFound default={true} />
     </Router>
   </main>
 );

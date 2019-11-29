@@ -1,13 +1,13 @@
-import React, { Component, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { navigate } from '@reach/router';
 import "./Header.css";
 import { HEADER_VALUES } from "./Header.constant";
 import ThemeContext from './ThemeContext';
 
-const Header = () => {
-  const [theme, setTheme] = useContext(ThemeContext);
+const Header: FunctionComponent = () => {
+  const [localTheme, setTheme] = useContext(ThemeContext);
 
-  const handleClick =(animal, path) => {
+  const handleClick =(animal: string, path: string) => {
     setTheme(animal);
     navigate(path);
   };
@@ -18,8 +18,8 @@ const Header = () => {
         {([theme]) => (
         <nav>
           <ul>
-            {Object.keys(HEADER_VALUES).map((key, index) => {
-              let value = HEADER_VALUES[key];
+            {Object.keys(HEADER_VALUES).map((key: string, index: number) => {
+              const value = HEADER_VALUES[key];
               return (
                 <li
                   className={value.className + (theme === key ? ' active' : '')}
